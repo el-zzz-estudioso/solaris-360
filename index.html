@@ -4,17 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solaris 360 - Maximizando cada rayo de sol</title>
-    <!-- Bootstrap 5 CSS (Igual que en tu práctica de referencia) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <!-- Bootstrap Icons para apoyo visual -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- Fuente moderna -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
     <style>
-        /* =========================================================
-           ESTILOS PERSONALIZADOS FUSIONANDO LAS PRÁCTICAS DE REFERENCIA
-           ========================================================= */
         :root {
             --verde-fondo: rgb(62, 170, 40);
             --verde-oscuro: rgb(37, 141, 37);
@@ -29,15 +23,13 @@
         }
 
         body {
-            /* Fondo verde característico de tu segunda práctica */
             background-color: var(--verde-fondo);
             font-family: 'Inter', Arial, Helvetica, sans-serif;
             margin: 0;
             padding: 0;
             color: #1a2e05;
         }
-
-        /* Barra de navegación basada en tu primera práctica */
+        
         .navbar-solaris {
             background-color: #ffffff;
             border-bottom: 4px solid var(--verde-oscuro);
@@ -65,8 +57,7 @@
             background-color: var(--verde-contenedor);
             color: #1a2e05 !important;
         }
-
-        /* Contenedores principales verdes redondeados (Estilo segunda práctica) */
+        
         .contenedor-verde {
             max-width: 1100px;
             background-color: var(--verde-contenedor);
@@ -94,7 +85,6 @@
             display: inline-block;
         }
 
-        /* Animación del Panel Solar siguiendo al Sol en el SVG */
         @keyframes girarPanel {
             0% { transform: rotate(-28deg); }
             50% { transform: rotate(28deg); }
@@ -125,7 +115,6 @@
             animation: pulsoRayos 2s ease-in-out infinite;
         }
 
-        /* Estilos para los 4 cuadros FODA */
         .foda-card {
             border-radius: 12px;
             padding: 20px;
@@ -142,7 +131,6 @@
         .foda-debilidades { background-color: #fef9c3; border-left: 6px solid #ca8a04; }
         .foda-amenazas { background-color: #fee2e2; border-left: 6px solid #dc2626; }
 
-        /* Pasos de "¿Cómo funciona?" */
         .paso-circulo {
             width: 48px;
             height: 48px;
@@ -157,7 +145,6 @@
             margin: 0 auto 12px auto;
         }
 
-        /* Pie de página exacto de la segunda práctica */
         footer {
             background-color: var(--verde-oscuro);
             color: white;
@@ -168,7 +155,6 @@
             border-top: 4px solid #ffffff;
         }
 
-        /* Ajustes responsivos */
         @media (max-width: 768px) {
             .contenedor-verde {
                 margin: 18px 12px;
@@ -179,22 +165,16 @@
 </head>
 <body>
 
-    <!-- =========================================================
-         BARRA DE NAVEGACIÓN SUPERIOR (Inspirada en Imagen 1)
-         ========================================================= -->
     <header class="sticky-top">
         <nav class="navbar navbar-expand-lg navbar-solaris">
             <div class="container">
-                <!-- Logotipo SVG integrado + Nombre de empresa -->
                 <a class="navbar-brand" href="#inicio">
                     <svg width="46" height="46" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Logotipo Solaris 360">
                         <circle cx="32" cy="32" r="30" fill="#f2fbe0" stroke="#258d25" stroke-width="3"/>
-                        <!-- Sol -->
                         <circle cx="44" cy="18" r="7" fill="#facc15" stroke="#eab308" stroke-width="2"/>
                         <line x1="44" y1="7" x2="44" y2="10" stroke="#eab308" stroke-width="2" stroke-linecap="round"/>
                         <line x1="55" y1="18" x2="52" y2="18" stroke="#eab308" stroke-width="2" stroke-linecap="round"/>
                         <line x1="36" y1="11" x2="38" y2="13" stroke="#eab308" stroke-width="2" stroke-linecap="round"/>
-                        <!-- Base y panel solar inclinado -->
                         <path d="M26 52H38M32 52V38" stroke="#334155" stroke-width="3.5" stroke-linecap="round"/>
                         <g transform="rotate(-25 32 36)">
                             <rect x="14" y="28" width="36" height="14" rx="2" fill="#1e3a8a" stroke="#0f172a" stroke-width="2"/>
@@ -213,7 +193,6 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <!-- Enlaces a las 5 secciones principales -->
                 <div class="collapse navbar-collapse" id="menuPrincipal">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-1">
                         <li class="nav-item"><a class="nav-link active" href="#inicio">1. Inicio</a></li>
@@ -228,9 +207,7 @@
     </header>
 
     <main>
-        <!-- =========================================================
-             SECCIÓN 1: INICIO (Portada + Animación SVG + Calculadora CFE)
-             ========================================================= -->
+
         <section id="inicio" class="contenedor-verde">
             <div class="tarjeta-blanca-interna">
                 <div class="row align-items-center g-4">
@@ -251,14 +228,11 @@
                         </div>
                     </div>
 
-                    <!-- Ilustración SVG Animada del Panel Girando hacia el Sol -->
                     <div class="col-lg-5 text-center">
                         <div class="p-3 rounded-4" style="background: linear-gradient(180deg, #e0f2fe 0%, #f0fdf4 100%); border: 2px solid #bae6fd;">
                             <svg viewBox="0 0 300 220" class="w-100 h-auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animación de panel solar girando hacia el sol">
-                                <!-- Trayectoria punteada del sol -->
                                 <path d="M 60 65 Q 150 20 240 65" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="5,5"/>
                                 
-                                <!-- Sol en movimiento -->
                                 <g class="sol-animado">
                                     <circle cx="150" cy="42" r="18" fill="#facc15" stroke="#f59e0b" stroke-width="3"/>
                                     <g class="rayos-animados" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round">
@@ -272,22 +246,19 @@
                                         <line x1="136" y1="56" x2="132" y2="60"/>
                                     </g>
                                 </g>
-
-                                <!-- Suelo verde -->
+                                
                                 <rect x="10" y="190" width="280" height="20" rx="8" fill="#258d25"/>
                                 
-                                <!-- Poste y motor servomecanismo -->
                                 <rect x="143" y="155" width="14" height="36" fill="#475569"/>
                                 <rect x="125" y="185" width="50" height="8" rx="3" fill="#1e293b"/>
                                 <circle cx="150" cy="155" r="8" fill="#f97316" stroke="#1e293b" stroke-width="2"/>
 
-                                <!-- Panel Solar Giratorio + Sensores LDR -->
                                 <g class="panel-animado">
-                                    <!-- Estructura del panel -->
+                                    
                                     <rect x="85" y="135" width="130" height="16" rx="3" fill="#1e3a8a" stroke="#0f172a" stroke-width="2.5"/>
-                                    <!-- Celdas solares superiores -->
+                                    
                                     <rect x="88" y="132" width="124" height="6" rx="1" fill="#3b82f6"/>
-                                    <!-- Sensores de luz (Fotorresistencias) en extremos -->
+
                                     <circle cx="88" cy="130" r="4" fill="#ef4444" stroke="#ffffff" stroke-width="1"/>
                                     <circle cx="212" cy="130" r="4" fill="#ef4444" stroke="#ffffff" stroke-width="1"/>
                                     <text x="150" y="122" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a8a">Sensores LDR Activos</text>
@@ -298,7 +269,6 @@
                     </div>
                 </div>
 
-                <!-- CALCULADORA INTERACTIVA DE AHORRO CFE (Desplegable/Integrada) -->
                 <div id="calculadora-cfe" class="mt-4 p-4 rounded-3" style="background-color: var(--verde-claro-suave); border: 2px dashed var(--verde-oscuro);">
                     <div class="row align-items-center g-3">
                         <div class="col-md-5">
@@ -325,14 +295,10 @@
         </div>
     </section>
 
-    <!-- =========================================================
-         SECCIÓN 2: NOSOTROS (Misión, Visión, ODS 7, Ventajas, FODA y Equipo)
-         ========================================================= -->
     <section id="nosotros" class="contenedor-verde">
         <div class="tarjeta-blanca-interna">
             <h2 class="titulo-seccion">2. Nosotros: Identidad, ODS 7 y Ventajas</h2>
             
-            <!-- Quiénes somos, Misión y Visión -->
             <div class="row g-4 mb-4">
                 <div class="col-md-12">
                     <p class="fs-6 text-secondary">
@@ -357,7 +323,6 @@
                 </div>
             </div>
 
-            <!-- Compromiso con el ODS 7 -->
             <div class="p-4 rounded-3 mb-5 text-white" style="background: linear-gradient(135deg, #d97706 0%, #eab308 100%);">
                 <div class="d-flex align-items-center gap-3 mb-2">
                     <span class="badge bg-dark fs-5 px-3 py-2">ODS 7</span>
@@ -367,8 +332,6 @@
                     Nuestro proyecto contribuye directamente al Objetivo de Desarrollo Sostenible 7 al integrar tres pilares fundamentales: primero, la <strong>eficiencia energética</strong>, ya que al seguir la trayectoria del sol nuestros paneles aprovechan mucho mejor los recursos naturales durante todo el día; segundo, la <strong>asequibilidad</strong>, porque al generar mayor electricidad con un solo equipo, las familias no necesitan comprar tantos paneles para cubrir su consumo diario; y tercero, lograr <strong>cero emisiones</strong>, sustituyendo la electricidad producida por la quema de combustibles fósiles por energía 100 % limpia y renovable.
                 </p>
             </div>
-
-            <!-- NUEVO BLOQUE DESTACADO: ¿POR QUÉ SOMOS MEJORES Y MÁS ACCESIBLES? -->
             <div class="p-4 rounded-4 mb-5" style="background-color: #f0fdf4; border: 2px solid #16a34a;">
                 <div class="d-flex flex-wrap align-items-center justify-content-between mb-3 gap-2">
                     <h3 class="fw-bold text-success mb-0">
@@ -413,10 +376,9 @@
                 </div>
             </div>
 
-            <!-- ANÁLISIS FODA EN 4 CUADROS -->
                 <h3 class="fw-bold text-dark mb-3"><i class="bi bi-grid-2x2-fill text-success me-2"></i>Análisis FODA de Solaris 360</h3>
                 <div class="row g-3 mb-5">
-                    <!-- Fortalezas -->
+
                     <div class="col-md-6">
                         <div class="foda-card foda-fortalezas">
                             <h5 class="fw-bold text-success"><i class="bi bi-plus-circle-fill me-2"></i>Fortalezas (Interno)</h5>
@@ -427,7 +389,6 @@
                             </ul>
                         </div>
                     </div>
-                    <!-- Oportunidades -->
                     <div class="col-md-6">
                         <div class="foda-card foda-oportunidades">
                             <h5 class="fw-bold text-primary"><i class="bi bi-graph-up-arrow me-2"></i>Oportunidades (Externo)</h5>
@@ -438,7 +399,7 @@
                             </ul>
                         </div>
                     </div>
-                    <!-- Debilidades -->
+
                     <div class="col-md-6">
                         <div class="foda-card foda-debilidades">
                             <h5 class="fw-bold text-warning-emphasis"><i class="bi bi-exclamation-triangle-fill me-2"></i>Debilidades (Interno)</h5>
@@ -448,7 +409,7 @@
                             </ul>
                         </div>
                     </div>
-                    <!-- Amenazas -->
+
                     <div class="col-md-6">
                         <div class="foda-card foda-amenazas">
                             <h5 class="fw-bold text-danger"><i class="bi bi-shield-exclamation me-2"></i>Amenazas (Externo)</h5>
@@ -460,7 +421,6 @@
                     </div>
                 </div>
 
-                <!-- ROLES DEL EQUIPO -->
                 <h3 class="fw-bold text-dark mb-3"><i class="bi bi-people-fill text-success me-2"></i>Nuestro Equipo de Trabajo</h3>
                 <div class="row g-3">
                     <div class="col-md-4 col-sm-6">
@@ -502,9 +462,6 @@
             </div>
         </section>
 
-        <!-- =========================================================
-             SECCIÓN 3: ¿CÓMO FUNCIONA? (Diagrama Estrella en 3 Pasos)
-             ========================================================= -->
         <section id="como-funciona" class="contenedor-verde">
             <div class="tarjeta-blanca-interna">
                 <div class="text-center mb-4">
@@ -513,13 +470,12 @@
                     <p class="text-secondary">Un sistema automatizado en 3 pasos sencillos para no perder ni un minuto de radiación solar.</p>
                 </div>
 
-                <!-- Diagrama visual de los 3 pasos -->
                 <div class="row g-4 align-items-stretch">
-                    <!-- Paso 1 -->
+        
                     <div class="col-md-4">
                         <div class="p-4 rounded-4 text-center h-100 border border-2 border-success-subtle" style="background-color: #f8fafc;">
                             <div class="paso-circulo">1</div>
-                            <!-- SVG Paso 1: Sensores LDR -->
+                        
                             <svg width="110" height="90" viewBox="0 0 120 90" class="my-2" xmlns="http://www.w3.org/2000/svg">
                                 <circle cx="30" cy="22" r="12" fill="#facc15"/>
                                 <path d="M45 32 L68 48" stroke="#f59e0b" stroke-width="3" stroke-dasharray="4,2"/>
@@ -535,11 +491,11 @@
                         </div>
                     </div>
 
-                    <!-- Paso 2 -->
+                
                     <div class="col-md-4">
                         <div class="p-4 rounded-4 text-center h-100 border border-2 border-success-subtle" style="background-color: #f8fafc;">
                             <div class="paso-circulo">2</div>
-                            <!-- SVG Paso 2: Motor girando panel -->
+                          
                             <svg width="110" height="90" viewBox="0 0 120 90" class="my-2" xmlns="http://www.w3.org/2000/svg">
                                 <rect x="55" y="55" width="10" height="25" fill="#475569"/>
                                 <circle cx="60" cy="52" r="9" fill="#f97316"/>
@@ -556,11 +512,11 @@
                         </div>
                     </div>
 
-                    <!-- Paso 3 -->
+                
                     <div class="col-md-4">
                         <div class="p-4 rounded-4 text-center h-100 border border-2 border-success" style="background-color: #f0fdf4;">
                             <div class="paso-circulo">3</div>
-                            <!-- SVG Paso 3: +35% Energía -->
+                          
                             <svg width="110" height="90" viewBox="0 0 120 90" class="my-2" xmlns="http://www.w3.org/2000/svg">
                                 <rect x="35" y="22" width="50" height="55" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>
                                 <rect x="50" y="16" width="20" height="6" rx="2" fill="#16a34a"/>
@@ -576,18 +532,15 @@
             </div>
         </section>
 
-        <!-- =========================================================
-             SECCIÓN 4: PRODUCTOS / MODELOS (Card-Group estilo Imagen 1)
-             ========================================================= -->
         <section id="productos" class="contenedor-verde">
             <div class="tarjeta-blanca-interna">
                 <h2 class="titulo-seccion">4. Nuestros Modelos y Soluciones</h2>
                 <p class="text-secondary mb-4">Elige el sistema Solaris 360 adaptado a tus necesidades energéticas y espacio disponible:</p>
 
-                <!-- Estructura card-group inspirada directamente en el código de tu primera imagen -->
+            
                 <div class="card-group gap-3">
                     
-                    <!-- Modelo 1: Panel Mini -->
+              
                     <div class="card rounded-4 overflow-hidden border shadow-sm">
                         <div class="p-3 text-center" style="background-color: #ecfdf5;">
                             <svg width="160" height="115" viewBox="0 0 160 115" xmlns="http://www.w3.org/2000/svg">
@@ -596,7 +549,7 @@
                                 <g transform="rotate(-18 80 65)">
                                     <rect x="42" y="50" width="76" height="14" rx="2" fill="#1d4ed8"/>
                                 </g>
-                                <!-- Celular cargando -->
+                            
                                 <rect x="108" y="68" width="18" height="27" rx="3" fill="#0f172a"/>
                                 <rect x="111" y="72" width="12" height="19" fill="#38bdf8"/>
                                 <path d="M80 75 Q95 85 108 82" fill="none" stroke="#eab308" stroke-width="2.5"/>
@@ -614,15 +567,15 @@
                         </div>
                     </div>
 
-                    <!-- Modelo 2: Kit Hogar Inicial -->
+              
                     <div class="card rounded-4 overflow-hidden border shadow-sm">
                         <div class="p-3 text-center" style="background-color: #eff6ff;">
                             <svg width="160" height="115" viewBox="0 0 160 115" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Casa / Hogar -->
+                   
                                 <polygon points="30,65 80,35 130,65" fill="#dc2626"/>
                                 <rect x="40" y="65" width="80" height="40" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
                                 <rect x="72" y="80" width="16" height="25" fill="#78350f"/>
-                                <!-- Panel giratorio en azotea -->
+                   
                                 <rect x="76" y="25" width="8" height="12" fill="#334155"/>
                                 <g transform="rotate(-15 80 25)">
                                     <rect x="45" y="16" width="70" height="10" rx="2" fill="#1e3a8a"/>
@@ -641,15 +594,15 @@
                         </div>
                     </div>
 
-                    <!-- Modelo 3: Paquete Escolar / Negocio -->
+     
                     <div class="card rounded-4 overflow-hidden border shadow-sm">
                         <div class="p-3 text-center" style="background-color: #fefce8;">
                             <svg width="160" height="115" viewBox="0 0 160 115" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Edificio Escolar -->
+                           
                                 <rect x="25" y="50" width="110" height="55" rx="3" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/>
                                 <rect x="35" y="65" width="40" height="25" fill="#bae6fd"/>
                                 <rect x="90" y="70" width="25" height="35" fill="#0284c7"/>
-                                <!-- Doble panel en techo -->
+
                                 <g transform="rotate(-15 55 40)">
                                     <rect x="30" y="34" width="45" height="9" rx="2" fill="#1e3a8a"/>
                                 </g>
@@ -674,15 +627,12 @@
             </div>
         </section>
 
-        <!-- =========================================================
-             SECCIÓN 5: COTIZACIONES, PREGUNTAS FRECUENTES Y CONTACTO
-             ========================================================= -->
+     
         <section id="contacto" class="contenedor-verde">
             <div class="tarjeta-blanca-interna">
                 <h2 class="titulo-seccion">5. Cotizaciones, Preguntas Frecuentes y Contacto</h2>
 
                 <div class="row g-4">
-                    <!-- Formulario de Cotización -->
                     <div class="col-lg-6">
                         <div class="p-4 rounded-4 bg-light border h-100">
                             <h4 class="fw-bold text-success mb-3"><i class="bi bi-envelope-paper-fill me-2"></i>Solicita tu Cotización</h4>
@@ -711,19 +661,19 @@
                                     <i class="bi bi-send-fill me-2"></i>Enviar solicitud de informes
                                 </button>
                             </form>
-                            <!-- Mensaje de confirmación sin usar alert() -->
+       
                             <div id="alertaEnvio" class="alert alert-success mt-3 d-none fw-semibold" role="alert">
                                 <i class="bi bi-check-circle-fill me-2"></i>¡Gracias! Hemos recibido tu solicitud en Solaris 360. Un asesor te enviará tu cotización muy pronto.
                             </div>
                         </div>
                     </div>
 
-                    <!-- Preguntas Frecuentes (Acordeón) + Datos de Contacto -->
+
                     <div class="col-lg-6 d-flex flex-column justify-content-between">
                         <div>
                             <h4 class="fw-bold text-dark mb-3"><i class="bi bi-question-circle-fill text-success me-2"></i>Preguntas Frecuentes</h4>
                             <div class="accordion mb-4" id="acordeonFAQ">
-                                <!-- Pregunta clave solicitada -->
+
                                 <div class="accordion-item">
                                     <h2 class="accordion-header">
                                         <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true">
@@ -765,7 +715,7 @@
                             </div>
                         </div>
 
-                        <!-- Tarjeta de Datos de Contacto -->
+
                         <div class="p-4 rounded-4 text-white" style="background-color: var(--verde-oscuro);">
                             <h5 class="fw-bold mb-2"><i class="bi bi-info-circle-fill me-2"></i>Datos de Contacto - Solaris 360</h5>
                             <p class="mb-0 small">
@@ -778,16 +728,10 @@
         </section>
     </main>
 
-    <!-- =========================================================
-         PIE DE PÁGINA CON NOMBRE Y ESLOGAN DE SOLARIS 360
-         ========================================================= -->
     <footer>
         Solaris 360 | Maximizando cada rayo de sol.
     </footer>
 
-    <!-- =========================================================
-         MODAL DE DETALLES DE PRODUCTO ("Ver más...") CON PRECIO
-         ========================================================= -->
     <div class="modal fade" id="modalDetalleProducto" tabindex="-1" aria-labelledby="modalTitulo" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-4 border-0 shadow">
@@ -811,12 +755,10 @@
         </div>
     </div>
 
-    <!-- Bootstrap 5 JS Bundle -->
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-    <!-- Lógica Interactiva en JavaScript -->
     <script>
-        // 1. Función para calcular el ahorro bimestral, anual y tiempo de recuperación de inversión
         function calcularAhorro() {
             const inputGasto = document.getElementById('gastoBimestral');
             const resultado = document.getElementById('resultadoAhorro');
@@ -828,11 +770,11 @@
                 inputGasto.value = 1500;
             }
 
-            // Con el +35% de eficiencia extra del seguidor solar, se estima un ahorro promedio del 85% en el recibo
+
             const ahorroBimestral = gasto * 0.85;
             const ahorroAnual = ahorroBimestral * 6;
 
-            // Estimación realista del costo del sistema según el consumo del usuario
+
             const inversionEstimada = ahorroAnual <= 12000 ? 14900 : 42000;
             const aniosRetorno = (inversionEstimada / ahorroAnual).toFixed(1);
 
@@ -840,7 +782,6 @@
             retorno.textContent = 'Recuperas inversión en ~' + aniosRetorno + ' años';
         }
 
-        // 2. Función para enfocar la calculadora al hacer clic en "Calcula tu ahorro"
         function mostrarCalculadora() {
             const inputGasto = document.getElementById('gastoBimestral');
             if (inputGasto) {
@@ -848,7 +789,6 @@
             }
         }
 
-        // 3. Función para abrir el modal de cada producto con su precio y detalles
         let instanciaModalProducto = null;
         let modeloSeleccionadoActual = 'Kit Hogar Inicial';
 
@@ -858,7 +798,6 @@
             document.getElementById('modalSubtitulo').textContent = subtitulo;
             document.getElementById('modalDescripcion').textContent = descripcion;
 
-            // Guardar el modelo para seleccionarlo automáticamente si pulsan "Cotizar este modelo"
             if (titulo.includes('Mini')) {
                 modeloSeleccionadoActual = 'Panel Mini';
             } else if (titulo.includes('Escolar')) {
@@ -872,7 +811,6 @@
             instanciaModalProducto.show();
         }
 
-        // 4. Función para cerrar el modal y preseleccionar el modelo en el formulario de cotización
         function cerrarModalYCotizar() {
             if (instanciaModalProducto) {
                 instanciaModalProducto.hide();
@@ -883,7 +821,7 @@
             }
         }
 
-        // 5. Función para manejar el envío del formulario de cotización sin recargar la página
+
         function enviarCotizacion(event) {
             event.preventDefault();
             const alerta = document.getElementById('alertaEnvio');
@@ -891,7 +829,6 @@
             event.target.reset();
         }
 
-        // Inicializar cálculo por defecto al cargar la página
         window.addEventListener('DOMContentLoaded', calcularAhorro);
     </script>
 </body>
