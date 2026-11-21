@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solaris 360 - Maximizando cada rayo de sol</title>
+    <!-- Bootstrap 5 CSS (Igual que en tu práctica de referencia) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Bootstrap Icons para apoyo visual -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Fuente moderna -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================================================
+           ESTILOS PERSONALIZADOS FUSIONANDO LAS PRÁCTICAS DE REFERENCIA
+           ========================================================= */
+        :root {
+            --verde-fondo: rgb(62, 170, 40);
+            --verde-oscuro: rgb(37, 141, 37);
+            --verde-contenedor: rgb(134, 204, 3);
+            --verde-claro-suave: #f2fbe0;
+            --amarillo-sol: #facc15;
+            --azul-panel: #1e3a8a;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            /* Fondo verde característico de tu segunda práctica */
+            background-color: var(--verde-fondo);
+            font-family: 'Inter', Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #1a2e05;
+        }
+
+        /* Barra de navegación basada en tu primera práctica */
+        .navbar-solaris {
+            background-color: #ffffff;
+            border-bottom: 4px solid var(--verde-oscuro);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            color: var(--verde-oscuro) !important;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.35rem;
+        }
+
+        .nav-link {
+            font-weight: 600;
+            color: #2d3748 !important;
+            border-radius: 8px;
+            padding: 8px 14px !important;
+            transition: all 0.25s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background-color: var(--verde-contenedor);
+            color: #1a2e05 !important;
+        }
+
+        /* Contenedores principales verdes redondeados (Estilo segunda práctica) */
+        .contenedor-verde {
+            max-width: 1100px;
+            background-color: var(--verde-contenedor);
+            margin: 30px auto;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+            border: 2px solid rgba(255, 255, 255, 0.35);
+        }
+
+        .tarjeta-blanca-interna {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            height: 100%;
+        }
+
+        .titulo-seccion {
+            color: #143601;
+            font-weight: 800;
+            border-bottom: 3px solid var(--verde-oscuro);
+            padding-bottom: 10px;
+            margin-bottom: 24px;
+            display: inline-block;
+        }
+
+        /* Animación del Panel Solar siguiendo al Sol en el SVG */
+        @keyframes girarPanel {
+            0% { transform: rotate(-28deg); }
+            50% { transform: rotate(28deg); }
+            100% { transform: rotate(-28deg); }
+        }
+
+        @keyframes moverSol {
+            0% { transform: translate(-45px, 15px); }
+            50% { transform: translate(45px, 15px); }
+            100% { transform: translate(-45px, 15px); }
+        }
+
+        @keyframes pulsoRayos {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        .panel-animado {
+            transform-origin: 150px 155px;
+            animation: girarPanel 8s ease-in-out infinite;
+        }
+
+        .sol-animado {
+            animation: moverSol 8s ease-in-out infinite;
+        }
+
+        .rayos-animados {
+            animation: pulsoRayos 2s ease-in-out infinite;
+        }
+
+        /* Estilos para los 4 cuadros FODA */
+        .foda-card {
+            border-radius: 12px;
+            padding: 20px;
+            height: 100%;
+            color: #1f2937;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+        .foda-card:hover {
+            transform: translateY(-4px);
+        }
+        .foda-fortalezas { background-color: #dcfce7; border-left: 6px solid #16a34a; }
+        .foda-oportunidades { background-color: #dbeafe; border-left: 6px solid #2563eb; }
+        .foda-debilidades { background-color: #fef9c3; border-left: 6px solid #ca8a04; }
+        .foda-amenazas { background-color: #fee2e2; border-left: 6px solid #dc2626; }
+
+        /* Pasos de "¿Cómo funciona?" */
+        .paso-circulo {
+            width: 48px;
+            height: 48px;
+            background-color: var(--verde-oscuro);
+            color: white;
+            font-weight: 800;
+            font-size: 1.25rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px auto;
+        }
+
+        /* Pie de página exacto de la segunda práctica */
+        footer {
+            background-color: var(--verde-oscuro);
+            color: white;
+            text-align: center;
+            padding: 24px 15px;
+            margin-top: 40px;
+            font-weight: 600;
+            border-top: 4px solid #ffffff;
+        }
+
+        /* Ajustes responsivos */
+        @media (max-width: 768px) {
+            .contenedor-verde {
+                margin: 18px 12px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- =========================================================
+         BARRA DE NAVEGACIÓN SUPERIOR (Inspirada en Imagen 1)
+         ========================================================= -->
+    <header class="sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-solaris">
+            <div class="container">
+                <!-- Logotipo SVG integrado + Nombre de empresa -->
+                <a class="navbar-brand" href="#inicio">
+                    <svg width="46" height="46" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Logotipo Solaris 360">
+                        <circle cx="32" cy="32" r="30" fill="#f2fbe0" stroke="#258d25" stroke-width="3"/>
+                        <!-- Sol -->
+                        <circle cx="44" cy="18" r="7" fill="#facc15" stroke="#eab308" stroke-width="2"/>
+                        <line x1="44" y1="7" x2="44" y2="10" stroke="#eab308" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="55" y1="18" x2="52" y2="18" stroke="#eab308" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="36" y1="11" x2="38" y2="13" stroke="#eab308" stroke-width="2" stroke-linecap="round"/>
+                        <!-- Base y panel solar inclinado -->
+                        <path d="M26 52H38M32 52V38" stroke="#334155" stroke-width="3.5" stroke-linecap="round"/>
+                        <g transform="rotate(-25 32 36)">
+                            <rect x="14" y="28" width="36" height="14" rx="2" fill="#1e3a8a" stroke="#0f172a" stroke-width="2"/>
+                            <line x1="26" y1="28" x2="26" y2="42" stroke="#60a5fa" stroke-width="1.2"/>
+                            <line x1="38" y1="28" x2="38" y2="42" stroke="#60a5fa" stroke-width="1.2"/>
+                            <line x1="14" y1="35" x2="50" y2="35" stroke="#60a5fa" stroke-width="1.2"/>
+                        </g>
+                    </svg>
+                    <div>
+                        <span>Solaris 360</span>
+                        <small class="d-block text-muted" style="font-size: 0.72rem; font-weight: 600;">Maximizando cada rayo de sol.</small>
+                    </div>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal" aria-controls="menuPrincipal" aria-expanded="false" aria-label="Alternar navegación">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Enlaces a las 5 secciones principales -->
+                <div class="collapse navbar-collapse" id="menuPrincipal">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-1">
+                        <li class="nav-item"><a class="nav-link active" href="#inicio">1. Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#nosotros">2. Nosotros</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#como-funciona">3. ¿Cómo funciona?</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#productos">4. Productos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contacto">5. Cotizaciones</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- =========================================================
+             SECCIÓN 1: INICIO (Portada + Animación SVG + Calculadora CFE)
+             ========================================================= -->
+        <section id="inicio" class="contenedor-verde">
+            <div class="tarjeta-blanca-interna">
+                <div class="row align-items-center g-4">
+                    <div class="col-lg-7">
+                        <span class="badge bg-success mb-2 px-3 py-2 fs-6">Energía Solar Inteligente de Seguimiento</span>
+                        <h1 class="display-5 fw-bold text-dark mb-2">Solaris 360</h1>
+                        <p class="fs-4 fw-semibold text-success mb-3">"Maximizando cada rayo de sol."</p>
+                        <p class="lead text-secondary">
+                            Fabricamos e instalamos <strong>paneles solares inteligentes</strong> equipados con sensores de luz que giran automáticamente para seguir el movimiento del sol durante todo el día, logrando producir <strong>hasta 35% más electricidad en menos espacio</strong>.
+                        </p>
+                        <div class="d-flex flex-wrap gap-3 mt-4">
+                            <a href="#calculadora-cfe" class="btn btn-success btn-lg fw-bold px-4 shadow-sm" onclick="mostrarCalculadora()">
+                                <i class="bi bi-calculator me-2"></i>Calcula tu ahorro
+                            </a>
+                            <a href="#como-funciona" class="btn btn-outline-success btn-lg fw-semibold px-4">
+                                Ver cómo gira
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Ilustración SVG Animada del Panel Girando hacia el Sol -->
+                    <div class="col-lg-5 text-center">
+                        <div class="p-3 rounded-4" style="background: linear-gradient(180deg, #e0f2fe 0%, #f0fdf4 100%); border: 2px solid #bae6fd;">
+                            <svg viewBox="0 0 300 220" class="w-100 h-auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animación de panel solar girando hacia el sol">
+                                <!-- Trayectoria punteada del sol -->
+                                <path d="M 60 65 Q 150 20 240 65" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="5,5"/>
+                                
+                                <!-- Sol en movimiento -->
+                                <g class="sol-animado">
+                                    <circle cx="150" cy="42" r="18" fill="#facc15" stroke="#f59e0b" stroke-width="3"/>
+                                    <g class="rayos-animados" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round">
+                                        <line x1="150" y1="16" x2="150" y2="21"/>
+                                        <line x1="150" y1="63" x2="150" y2="68"/>
+                                        <line x1="124" y1="42" x2="129" y2="42"/>
+                                        <line x1="171" y1="42" x2="176" y2="42"/>
+                                        <line x1="132" y1="24" x2="136" y2="28"/>
+                                        <line x1="164" y1="56" x2="168" y2="60"/>
+                                        <line x1="168" y1="24" x2="164" y2="28"/>
+                                        <line x1="136" y1="56" x2="132" y2="60"/>
+                                    </g>
+                                </g>
+
+                                <!-- Suelo verde -->
+                                <rect x="10" y="190" width="280" height="20" rx="8" fill="#258d25"/>
+                                
+                                <!-- Poste y motor servomecanismo -->
+                                <rect x="143" y="155" width="14" height="36" fill="#475569"/>
+                                <rect x="125" y="185" width="50" height="8" rx="3" fill="#1e293b"/>
+                                <circle cx="150" cy="155" r="8" fill="#f97316" stroke="#1e293b" stroke-width="2"/>
+
+                                <!-- Panel Solar Giratorio + Sensores LDR -->
+                                <g class="panel-animado">
+                                    <!-- Estructura del panel -->
+                                    <rect x="85" y="135" width="130" height="16" rx="3" fill="#1e3a8a" stroke="#0f172a" stroke-width="2.5"/>
+                                    <!-- Celdas solares superiores -->
+                                    <rect x="88" y="132" width="124" height="6" rx="1" fill="#3b82f6"/>
+                                    <!-- Sensores de luz (Fotorresistencias) en extremos -->
+                                    <circle cx="88" cy="130" r="4" fill="#ef4444" stroke="#ffffff" stroke-width="1"/>
+                                    <circle cx="212" cy="130" r="4" fill="#ef4444" stroke="#ffffff" stroke-width="1"/>
+                                    <text x="150" y="122" text-anchor="middle" font-size="9" font-weight="bold" fill="#1e3a8a">Sensores LDR Activos</text>
+                                </g>
+                            </svg>
+                            <small class="text-muted fw-semibold d-block mt-1">Simulación en tiempo real: Seguimiento solar automático</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CALCULADORA INTERACTIVA DE AHORRO CFE (Desplegable/Integrada) -->
+                <div id="calculadora-cfe" class="mt-4 p-4 rounded-3" style="background-color: var(--verde-claro-suave); border: 2px dashed var(--verde-oscuro);">
+                    <div class="row align-items-center g-3">
+                        <div class="col-md-5">
+                            <h4 class="fw-bold text-success mb-1"><i class="bi bi-lightning-charge-fill"></i> Calculadora de Ahorro CFE</h4>
+                            <p class="small text-secondary mb-0">Ingresa cuánto pagas actualmente en tu recibo bimestral de luz para estimar tu ahorro con Solaris 360.</p>
+                        </div>
+                        <div class="col-md-4">
+                        <label for="gastoBimestral" class="form-label fw-bold small mb-1">Pago bimestral actual ($ MXN):</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-success text-white fw-bold">$</span>
+                            <input type="number" id="gastoBimestral" class="form-control fw-bold" value="1500" min="200" max="50000" step="100">
+                            <button class="btn btn-success fw-bold" type="button" onclick="calcularAhorro()">Calcular</button>
+                        </div>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <div class="p-2 bg-white rounded-3 border border-success">
+                            <span class="small text-muted d-block">Ahorro anual estimado:</span>
+                            <strong id="resultadoAhorro" class="fs-5 text-success">$7,650 MXN</strong>
+                            <span id="tiempoRetorno" class="badge bg-primary d-block mt-1">Recuperas inversión en ~1.9 años</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================
+         SECCIÓN 2: NOSOTROS (Misión, Visión, ODS 7, Ventajas, FODA y Equipo)
+         ========================================================= -->
+    <section id="nosotros" class="contenedor-verde">
+        <div class="tarjeta-blanca-interna">
+            <h2 class="titulo-seccion">2. Nosotros: Identidad, ODS 7 y Ventajas</h2>
+            
+            <!-- Quiénes somos, Misión y Visión -->
+            <div class="row g-4 mb-4">
+                <div class="col-md-12">
+                    <p class="fs-6 text-secondary">
+                        En <strong>Solaris 360</strong> somos una empresa mexicana joven e innovadora dedicada a la fabricación e instalación directa de sistemas fotovoltaicos inteligentes con seguidores solares automatizados. Creemos que la transición ecológica debe estar al alcance de todas las familias, escuelas y comercios sin costos inflados.
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <div class="p-4 rounded-3 h-100" style="background-color: #f0fdf4; border: 1px solid #bbf7d0;">
+                        <h4 class="fw-bold text-success"><i class="bi bi-bullseye me-2"></i>Misión</h4>
+                        <p class="mb-0 text-dark">
+                            Aprovechar al máximo la luz solar mediante tecnología accesible e inteligente, brindando a las familias, escuelas y negocios un importante ahorro de dinero en su recibo de luz mientras contribuimos activamente a reducir la contaminación ambiental.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="p-4 rounded-3 h-100" style="background-color: #eff6ff; border: 1px solid #bfdbfe;">
+                        <h4 class="fw-bold text-primary"><i class="bi bi-eye-fill me-2"></i>Visión</h4>
+                        <p class="mb-0 text-dark">
+                            Ser una empresa líder y reconocida a nivel nacional por modernizar hogares, escuelas y pequeños negocios con paneles solares inteligentes que no desperdicien ni un solo minuto de luz solar, impulsando comunidades sustentables.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Compromiso con el ODS 7 -->
+            <div class="p-4 rounded-3 mb-5 text-white" style="background: linear-gradient(135deg, #d97706 0%, #eab308 100%);">
+                <div class="d-flex align-items-center gap-3 mb-2">
+                    <span class="badge bg-dark fs-5 px-3 py-2">ODS 7</span>
+                    <h4 class="fw-bold mb-0 text-dark">Compromiso con la Energía Asequible y No Contaminante</h4>
+                </div>
+                <p class="mb-0 text-dark fw-medium">
+                    Nuestro proyecto contribuye directamente al Objetivo de Desarrollo Sostenible 7 al integrar tres pilares fundamentales: primero, la <strong>eficiencia energética</strong>, ya que al seguir la trayectoria del sol nuestros paneles aprovechan mucho mejor los recursos naturales durante todo el día; segundo, la <strong>asequibilidad</strong>, porque al generar mayor electricidad con un solo equipo, las familias no necesitan comprar tantos paneles para cubrir su consumo diario; y tercero, lograr <strong>cero emisiones</strong>, sustituyendo la electricidad producida por la quema de combustibles fósiles por energía 100 % limpia y renovable.
+                </p>
+            </div>
+
+            <!-- NUEVO BLOQUE DESTACADO: ¿POR QUÉ SOMOS MEJORES Y MÁS ACCESIBLES? -->
+            <div class="p-4 rounded-4 mb-5" style="background-color: #f0fdf4; border: 2px solid #16a34a;">
+                <div class="d-flex flex-wrap align-items-center justify-content-between mb-3 gap-2">
+                    <h3 class="fw-bold text-success mb-0">
+                        <i class="bi bi-award-fill me-2"></i>¿Por qué somos mejores y más accesibles que la competencia?
+                    </h3>
+                    <span class="badge bg-success px-3 py-2">Hasta 30% más económico</span>
+                </div>
+                <p class="text-secondary mb-4">
+                    A diferencia de las empresas tradicionales que revenden equipos importados y cobran instalaciones costosas, en <strong>Solaris 360</strong> logramos precios altamente accesibles gracias a 5 ventajas reales de ingeniería y operación directa:
+                </p>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="p-3 bg-white rounded-3 border border-success-subtle h-100 shadow-sm">
+                            <h6 class="fw-bold text-dark"><i class="bi bi-tools text-success me-2"></i>1. Fabricación e Instalación Directa</h6>
+                            <p class="small text-secondary mb-0">Aplicamos <strong>integración vertical</strong>: diseñamos, ensamblamos e instalamos nosotros mismos sin intermediarios ni subcontratistas, reduciendo hasta un <strong>30 % en costos de mano de obra</strong>.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-3 bg-white rounded-3 border border-success-subtle h-100 shadow-sm">
+                            <h6 class="fw-bold text-dark"><i class="bi bi-plug-fill text-primary me-2"></i>2. Diseño "Plug & Play" Preensamblado</h6>
+                            <p class="small text-secondary mb-0">Nuestros seguidores salen armados y calibrados desde el taller. La instalación en tu techo toma solo <strong>3 a 4 horas</strong> sin necesidad de grúas ni obras pesadas.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3 bg-white rounded-3 border border-success-subtle h-100 shadow-sm">
+                            <h6 class="fw-bold text-dark"><i class="bi bi-cpu-fill text-warning-emphasis me-2"></i>3. Seguidor de 1 Eje (Este-Oeste)</h6>
+                            <p class="small text-secondary mb-0">Obtiene hasta el <strong>90 % del rendimiento</strong> de un seguidor doble usando un solo motor y electrónica propia (microcontrolador tipo Arduino + sensores LDR), bajando el costo mecánico a la mitad.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3 bg-white rounded-3 border border-success-subtle h-100 shadow-sm">
+                            <h6 class="fw-bold text-dark"><i class="bi bi-lightning-fill text-danger me-2"></i>4. Menos Paneles (+35% Eficiencia)</h6>
+                            <p class="small text-secondary mb-0">Al generar <strong>35 % más energía por unidad</strong>, necesitas comprar menos paneles, menos cableado y un inversor más compacto para cubrir el mismo consumo.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3 bg-white rounded-3 border border-success-subtle h-100 shadow-sm">
+                            <h6 class="fw-bold text-dark"><i class="bi bi-layers-fill text-info me-2"></i>5. Sistema Modular y Deducción ISR</h6>
+                            <p class="small text-secondary mb-0">Empiezas con un <strong>Kit Inicial</strong> accesible para salir de la tarifa alta (DAC) de CFE y creces poco a poco; además en México es <strong>100 % deducible de ISR</strong> para negocios y escuelas.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ANÁLISIS FODA EN 4 CUADROS -->
+                <h3 class="fw-bold text-dark mb-3"><i class="bi bi-grid-2x2-fill text-success me-2"></i>Análisis FODA de Solaris 360</h3>
+                <div class="row g-3 mb-5">
+                    <!-- Fortalezas -->
+                    <div class="col-md-6">
+                        <div class="foda-card foda-fortalezas">
+                            <h5 class="fw-bold text-success"><i class="bi bi-plus-circle-fill me-2"></i>Fortalezas (Interno)</h5>
+                            <ul class="mb-0 ps-3">
+                                <li>Produce más energía que un panel solar normal del mismo tamaño.</li>
+                                <li>Funciona de manera automática usando sensores de luz (fotorresistencias) y motores pequeños.</li>
+                                <li>Ahorra espacio valioso en techos, azoteas o patios pequeños.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Oportunidades -->
+                    <div class="col-md-6">
+                        <div class="foda-card foda-oportunidades">
+                            <h5 class="fw-bold text-primary"><i class="bi bi-graph-up-arrow me-2"></i>Oportunidades (Externo)</h5>
+                            <ul class="mb-0 ps-3">
+                                <li>Cada vez sube más el precio de la electricidad tradicional (CFE) y la gente busca ahorrar.</li>
+                                <li>México cuenta con altísima radiación solar durante casi todo el año.</li>
+                                <li>Escuelas y negocios buscan modernizarse y verse más ecológicos.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Debilidades -->
+                    <div class="col-md-6">
+                        <div class="foda-card foda-debilidades">
+                            <h5 class="fw-bold text-warning-emphasis"><i class="bi bi-exclamation-triangle-fill me-2"></i>Debilidades (Interno)</h5>
+                            <ul class="mb-0 ps-3">
+                                <li>Es un poco más caro de fabricar que un panel fijo porque incluye motores y sensores electrónicos.</li>
+                                <li>Requiere mantenimiento preventivo ocasional en las piezas mecánicas que se mueven.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Amenazas -->
+                    <div class="col-md-6">
+                        <div class="foda-card foda-amenazas">
+                            <h5 class="fw-bold text-danger"><i class="bi bi-shield-exclamation me-2"></i>Amenazas (Externo)</h5>
+                            <ul class="mb-0 ps-3">
+                                <li>Vientos muy fuertes o granizo extremo que puedan dañar el mecanismo giratorio si no se protege.</li>
+                                <li>Empresas grandes consolidadas que ya venden paneles tradicionales fijos muy baratos.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ROLES DEL EQUIPO -->
+                <h3 class="fw-bold text-dark mb-3"><i class="bi bi-people-fill text-success me-2"></i>Nuestro Equipo de Trabajo</h3>
+                <div class="row g-3">
+                    <div class="col-md-4 col-sm-6">
+                        <div class="p-3 border rounded-3 bg-light h-100">
+                            <span class="badge bg-success mb-2">Dirección</span>
+                            <h6 class="fw-bold mb-1">Director General: Leonardo</h6>
+                            <p class="small text-muted mb-0">Organiza al equipo, revisa la calidad y ortografía del proyecto, y redacta la Misión, Visión y alineación con el ODS 7.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="p-3 border rounded-3 bg-light h-100">
+                            <span class="badge bg-primary mb-2">Ingeniería</span>
+                            <h6 class="fw-bold mb-1">Ingenieros de Prototipo: Evan y Leonardo</h6>
+                            <p class="small text-muted mb-0">Diseñan y explican el sistema electrónico (sensores LDR + placa tipo Arduino + servomotor) y construyen la maqueta funcional.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="p-3 border rounded-3 bg-light h-100">
+                            <span class="badge bg-warning text-dark mb-2">Finanzas</span>
+                            <h6 class="fw-bold mb-1">Encargado de Finanzas y FODA: Braulio</h6>
+                            <p class="small text-muted mb-0">Elabora el análisis FODA estratégico y calcula los costos de producción y el ahorro bimestral para las familias.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="p-3 border rounded-3 bg-light h-100">
+                            <span class="badge bg-info text-dark mb-2">Diseño Digital</span>
+                            <h6 class="fw-bold mb-1">Diseñador Web: Emanuel</h6>
+                            <p class="small text-muted mb-0">Crea la identidad visual, el logotipo de Solaris 360 y programa las 5 secciones interactivas del sitio web.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="p-3 border rounded-3 bg-light h-100">
+                            <span class="badge bg-danger mb-2">Comercialización</span>
+                            <h6 class="fw-bold mb-1">Mercadotecnia: Chyntia y Braulio</h6>
+                            <p class="small text-muted mb-0">Definen los nombres comerciales de los modelos (Mini, Hogar/Escuela y Negocio) y preparan la presentación al público.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================================
+             SECCIÓN 3: ¿CÓMO FUNCIONA? (Diagrama Estrella en 3 Pasos)
+             ========================================================= -->
+        <section id="como-funciona" class="contenedor-verde">
+            <div class="tarjeta-blanca-interna">
+                <div class="text-center mb-4">
+                    <span class="badge bg-warning text-dark px-3 py-2 mb-2 fw-bold">Tecnología Inteligente Arduino + Sensores</span>
+                    <h2 class="titulo-seccion d-block border-0 mb-1">3. ¿Cómo funciona Solaris 360?</h2>
+                    <p class="text-secondary">Un sistema automatizado en 3 pasos sencillos para no perder ni un minuto de radiación solar.</p>
+                </div>
+
+                <!-- Diagrama visual de los 3 pasos -->
+                <div class="row g-4 align-items-stretch">
+                    <!-- Paso 1 -->
+                    <div class="col-md-4">
+                        <div class="p-4 rounded-4 text-center h-100 border border-2 border-success-subtle" style="background-color: #f8fafc;">
+                            <div class="paso-circulo">1</div>
+                            <!-- SVG Paso 1: Sensores LDR -->
+                            <svg width="110" height="90" viewBox="0 0 120 90" class="my-2" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="30" cy="22" r="12" fill="#facc15"/>
+                                <path d="M45 32 L68 48" stroke="#f59e0b" stroke-width="3" stroke-dasharray="4,2"/>
+                                <rect x="55" y="48" width="45" height="28" rx="4" fill="#0284c7"/>
+                                <circle cx="65" cy="44" r="5" fill="#ef4444"/>
+                                <circle cx="90" cy="44" r="5" fill="#94a3b8"/>
+                                <text x="77" y="66" text-anchor="middle" fill="white" font-size="9" font-weight="bold">ARDUINO</text>
+                            </svg>
+                            <h5 class="fw-bold text-dark">Detección Solar</h5>
+                            <p class="small text-secondary mb-0">
+                                Los <strong>sensores de luz (fotorresistencias LDR)</strong> conectados a una placa tipo <strong>Arduino</strong> miden constantemente en qué ángulo del cielo hay mayor intensidad luminosa.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Paso 2 -->
+                    <div class="col-md-4">
+                        <div class="p-4 rounded-4 text-center h-100 border border-2 border-success-subtle" style="background-color: #f8fafc;">
+                            <div class="paso-circulo">2</div>
+                            <!-- SVG Paso 2: Motor girando panel -->
+                            <svg width="110" height="90" viewBox="0 0 120 90" class="my-2" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="55" y="55" width="10" height="25" fill="#475569"/>
+                                <circle cx="60" cy="52" r="9" fill="#f97316"/>
+                                <g transform="rotate(-22 60 52)">
+                                    <rect x="20" y="42" width="80" height="10" rx="2" fill="#1e3a8a"/>
+                                </g>
+                                <path d="M 35 28 A 30 30 0 0 1 85 28" fill="none" stroke="#16a34a" stroke-width="3" stroke-linecap="round"/>
+                                <polygon points="85,28 78,24 81,32" fill="#16a34a"/>
+                            </svg>
+                            <h5 class="fw-bold text-dark">Movimiento en 1 Eje</h5>
+                            <p class="small text-secondary mb-0">
+                                La placa de control activa un <strong>motor de bajo consumo en 1 eje (Este-Oeste)</strong> que gira suavemente el panel para colocarlo perpendicular a los rayos del sol con mínimo gasto mecánico.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Paso 3 -->
+                    <div class="col-md-4">
+                        <div class="p-4 rounded-4 text-center h-100 border border-2 border-success" style="background-color: #f0fdf4;">
+                            <div class="paso-circulo">3</div>
+                            <!-- SVG Paso 3: +35% Energía -->
+                            <svg width="110" height="90" viewBox="0 0 120 90" class="my-2" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="35" y="22" width="50" height="55" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>
+                                <rect x="50" y="16" width="20" height="6" rx="2" fill="#16a34a"/>
+                                <polygon points="63,32 48,52 59,52 55,68 72,47 61,47" fill="#eab308" stroke="#ca8a04" stroke-width="1"/>
+                            </svg>
+                            <h5 class="fw-bold text-success">+35% Más Electricidad</h5>
+                            <p class="small text-dark mb-0">
+                                Al recibir luz directa desde el amanecer hasta el atardecer, se genera <strong>hasta un 35% más de energía eléctrica</strong> que con un panel fijo tradicional.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================================
+             SECCIÓN 4: PRODUCTOS / MODELOS (Card-Group estilo Imagen 1)
+             ========================================================= -->
+        <section id="productos" class="contenedor-verde">
+            <div class="tarjeta-blanca-interna">
+                <h2 class="titulo-seccion">4. Nuestros Modelos y Soluciones</h2>
+                <p class="text-secondary mb-4">Elige el sistema Solaris 360 adaptado a tus necesidades energéticas y espacio disponible:</p>
+
+                <!-- Estructura card-group inspirada directamente en el código de tu primera imagen -->
+                <div class="card-group gap-3">
+                    
+                    <!-- Modelo 1: Panel Mini -->
+                    <div class="card rounded-4 overflow-hidden border shadow-sm">
+                        <div class="p-3 text-center" style="background-color: #ecfdf5;">
+                            <svg width="160" height="115" viewBox="0 0 160 115" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="20" y="95" width="120" height="10" rx="4" fill="#15803d"/>
+                                <rect x="74" y="65" width="12" height="30" fill="#334155"/>
+                                <g transform="rotate(-18 80 65)">
+                                    <rect x="42" y="50" width="76" height="14" rx="2" fill="#1d4ed8"/>
+                                </g>
+                                <!-- Celular cargando -->
+                                <rect x="108" y="68" width="18" height="27" rx="3" fill="#0f172a"/>
+                                <rect x="111" y="72" width="12" height="19" fill="#38bdf8"/>
+                                <path d="M80 75 Q95 85 108 82" fill="none" stroke="#eab308" stroke-width="2.5"/>
+                            </svg>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <span class="badge bg-info text-dark align-self-start mb-2">Portátil / 60W</span>
+                            <h5 class="card-title fw-bold">Panel Mini (Portátil / Camping)</h5>
+                            <p class="card-text text-secondary small">
+                                Compacto, ligero y listo para usar. Ideal para cargar baterías portátiles, lámparas LED o celulares en campamentos, días de campo o patios sin enchufes.
+                            </p>
+                            <button type="button" class="btn btn-primary mt-auto fw-semibold" onclick="abrirModalProducto('Panel Mini (Portátil / Camping)', '$2,450 MXN', 'Potencia: 60 Watts con micro-seguidor solar de 1 eje y salida USB/12V.', 'Por qué es tan accesible: Ensamblado con placa electrónica propia y estructura ligera de aluminio nacional. Incluye batería interna de respaldo y sensores LDR resistentes al agua para campamentos o emergencias.')">
+                                Ver más...
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Modelo 2: Kit Hogar Inicial -->
+                    <div class="card rounded-4 overflow-hidden border shadow-sm">
+                        <div class="p-3 text-center" style="background-color: #eff6ff;">
+                            <svg width="160" height="115" viewBox="0 0 160 115" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Casa / Hogar -->
+                                <polygon points="30,65 80,35 130,65" fill="#dc2626"/>
+                                <rect x="40" y="65" width="80" height="40" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+                                <rect x="72" y="80" width="16" height="25" fill="#78350f"/>
+                                <!-- Panel giratorio en azotea -->
+                                <rect x="76" y="25" width="8" height="12" fill="#334155"/>
+                                <g transform="rotate(-15 80 25)">
+                                    <rect x="45" y="16" width="70" height="10" rx="2" fill="#1e3a8a"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <span class="badge bg-success align-self-start mb-2">Más Vendido / Modular</span>
+                            <h5 class="card-title fw-bold">Kit Hogar Inicial (1 a 2 Paneles)</h5>
+                            <p class="card-text text-secondary small">
+                                Diseñado para azoteas de casas familiares. Reduce hasta un 60 % del recibo CFE, evita la tarifa alta (DAC) y te permite agregar más módulos después.
+                            </p>
+                            <button type="button" class="btn btn-primary mt-auto fw-semibold" onclick="abrirModalProducto('Kit Hogar Inicial (1 a 2 Paneles Inteligentes)', '$14,900 MXN', 'Instalación directa incluida en solo 3 horas (Sistema Plug & Play).', 'Por qué es tan accesible: Al producir +35 % más energía por panel y ser instalado directamente por nuestros técnicos sin intermediarios ni grúas, ahorras hasta 30 % frente a sistemas tradicionales. Reduce hasta 60 % tu recibo CFE y evita la tarifa DAC.')">
+                                Ver más...
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Modelo 3: Paquete Escolar / Negocio -->
+                    <div class="card rounded-4 overflow-hidden border shadow-sm">
+                        <div class="p-3 text-center" style="background-color: #fefce8;">
+                            <svg width="160" height="115" viewBox="0 0 160 115" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Edificio Escolar -->
+                                <rect x="25" y="50" width="110" height="55" rx="3" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/>
+                                <rect x="35" y="65" width="40" height="25" fill="#bae6fd"/>
+                                <rect x="90" y="70" width="25" height="35" fill="#0284c7"/>
+                                <!-- Doble panel en techo -->
+                                <g transform="rotate(-15 55 40)">
+                                    <rect x="30" y="34" width="45" height="9" rx="2" fill="#1e3a8a"/>
+                                </g>
+                                <g transform="rotate(-15 105 40)">
+                                    <rect x="80" y="34" width="45" height="9" rx="2" fill="#1e3a8a"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <span class="badge bg-warning text-dark align-self-start mb-2">100% Deducible ISR</span>
+                            <h5 class="card-title fw-bold">Paquete Escolar / Negocio (4 Paneles)</h5>
+                            <p class="card-text text-secondary small">
+                                Pensado para salones de clases, laboratorios y comercios que requieren máxima producción eléctrica en techos reducidos con seguidor de 1 eje.
+                            </p>
+                            <button type="button" class="btn btn-primary mt-auto fw-semibold" onclick="abrirModalProducto('Paquete Escolar / Negocio (4 Paneles con Seguidor 1 Eje)', '$42,000 MXN', 'Instalación Plug & Play incluida, monitoreo y 100 % deducible de impuestos.', 'Por qué es tan accesible: 4 paneles inteligentes Solaris 360 producen lo mismo que 6 paneles fijos tradicionales, ahorrando espacio y equipo. Además, en México las escuelas privadas y negocios pueden deducir el 100 % de la inversión en el primer año de ISR.')">
+                                Ver más...
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================================================
+             SECCIÓN 5: COTIZACIONES, PREGUNTAS FRECUENTES Y CONTACTO
+             ========================================================= -->
+        <section id="contacto" class="contenedor-verde">
+            <div class="tarjeta-blanca-interna">
+                <h2 class="titulo-seccion">5. Cotizaciones, Preguntas Frecuentes y Contacto</h2>
+
+                <div class="row g-4">
+                    <!-- Formulario de Cotización -->
+                    <div class="col-lg-6">
+                        <div class="p-4 rounded-4 bg-light border h-100">
+                            <h4 class="fw-bold text-success mb-3"><i class="bi bi-envelope-paper-fill me-2"></i>Solicita tu Cotización</h4>
+                            <form id="formCotizacion" onsubmit="enviarCotizacion(event)">
+                                <div class="mb-3">
+                                    <label for="nombreCliente" class="form-label fw-semibold">Nombre completo:</label>
+                                    <input type="text" class="form-control" id="nombreCliente" placeholder="Ej. Ana María López" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="correoCliente" class="form-label fw-semibold">Correo electrónico:</label>
+                                    <input type="email" class="form-control" id="correoCliente" placeholder="ejemplo@correo.com" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="modeloInteres" class="form-label fw-semibold">Modelo de interés:</label>
+                                    <select class="form-select" id="modeloInteres">
+                                        <option value="Panel Mini">Panel Mini (Portátil / Camping - $2,450 MXN)</option>
+                                        <option value="Kit Hogar Inicial" selected>Kit Hogar Inicial (1 a 2 Paneles - $14,900 MXN)</option>
+                                        <option value="Paquete Escolar / Negocio">Paquete Escolar / Negocio (4 Paneles - $42,000 MXN)</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="mensajeCliente" class="form-label fw-semibold">Comentarios o consumo aproximado:</label>
+                                    <textarea class="form-control" id="mensajeCliente" rows="3" placeholder="Cuéntanos dónde deseas instalarlo..."></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-success w-100 fw-bold py-2">
+                                    <i class="bi bi-send-fill me-2"></i>Enviar solicitud de informes
+                                </button>
+                            </form>
+                            <!-- Mensaje de confirmación sin usar alert() -->
+                            <div id="alertaEnvio" class="alert alert-success mt-3 d-none fw-semibold" role="alert">
+                                <i class="bi bi-check-circle-fill me-2"></i>¡Gracias! Hemos recibido tu solicitud en Solaris 360. Un asesor te enviará tu cotización muy pronto.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Preguntas Frecuentes (Acordeón) + Datos de Contacto -->
+                    <div class="col-lg-6 d-flex flex-column justify-content-between">
+                        <div>
+                            <h4 class="fw-bold text-dark mb-3"><i class="bi bi-question-circle-fill text-success me-2"></i>Preguntas Frecuentes</h4>
+                            <div class="accordion mb-4" id="acordeonFAQ">
+                                <!-- Pregunta clave solicitada -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true">
+                                            ¿Qué pasa si hay mucho viento o tormenta?
+                                        </button>
+                                    </h2>
+                                    <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#acordeonFAQ">
+                                        <div class="accordion-body text-secondary">
+                                            <strong>El panel se pone automáticamente en posición horizontal de seguridad.</strong> Nuestros equipos cuentan con sensores que detectan ráfagas fuertes y colocan el panel completamente plano para evitar resistencia al aire y proteger el mecanismo giratorio.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                            ¿Por qué sus precios son más bajos que otras marcas solares?
+                                        </button>
+                                    </h2>
+                                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#acordeonFAQ">
+                                        <div class="accordion-body text-secondary">
+                                            Porque fabricamos e instalamos directamente sin intermediarios, usamos seguidores eficientes de 1 eje con electrónica propia y nuestros equipos preensamblados <em>Plug & Play</em> se instalan en solo 3 a 4 horas sin grúas.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                            ¿El motor gasta mucha electricidad al moverse?
+                                        </button>
+                                    </h2>
+                                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#acordeonFAQ">
+                                        <div class="accordion-body text-secondary">
+                                            No. El motor solo realiza micro-ajustes cada pocos minutos y consume menos del 1% de la energía que el mismo panel produce.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta de Datos de Contacto -->
+                        <div class="p-4 rounded-4 text-white" style="background-color: var(--verde-oscuro);">
+                            <h5 class="fw-bold mb-2"><i class="bi bi-info-circle-fill me-2"></i>Datos de Contacto - Solaris 360</h5>
+                            <p class="mb-0 small">
+                                <strong>Proyecto en fase de lanzamiento:</strong> Por el momento todavía no contamos con teléfono, correo ni dirección oficial disponibles. Puedes dejarnos tus datos en el formulario de cotización y nos comunicaremos contigo en cuanto abramos atención al público.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- =========================================================
+         PIE DE PÁGINA CON NOMBRE Y ESLOGAN DE SOLARIS 360
+         ========================================================= -->
+    <footer>
+        Solaris 360 | Maximizando cada rayo de sol.
+    </footer>
+
+    <!-- =========================================================
+         MODAL DE DETALLES DE PRODUCTO ("Ver más...") CON PRECIO
+         ========================================================= -->
+    <div class="modal fade" id="modalDetalleProducto" tabindex="-1" aria-labelledby="modalTitulo" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 shadow">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title fw-bold" id="modalTitulo">Detalles del Modelo</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex align-items-center justify-content-between bg-light p-3 rounded-3 border border-success-subtle mb-3">
+                        <span class="fw-semibold text-secondary">Precio estimado:</span>
+                        <span class="badge bg-success fs-5 px-3 py-2" id="modalPrecio">$0 MXN</span>
+                    </div>
+                    <p class="fw-bold text-success mb-2" id="modalSubtitulo"></p>
+                    <p class="text-secondary mb-0" id="modalDescripcion"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <a href="#contacto" class="btn btn-success fw-bold" onclick="cerrarModalYCotizar()">Cotizar este modelo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- Lógica Interactiva en JavaScript -->
+    <script>
+        // 1. Función para calcular el ahorro bimestral, anual y tiempo de recuperación de inversión
+        function calcularAhorro() {
+            const inputGasto = document.getElementById('gastoBimestral');
+            const resultado = document.getElementById('resultadoAhorro');
+            const retorno = document.getElementById('tiempoRetorno');
+            let gasto = parseFloat(inputGasto.value);
+
+            if (isNaN(gasto) || gasto <= 0) {
+                gasto = 1500;
+                inputGasto.value = 1500;
+            }
+
+            // Con el +35% de eficiencia extra del seguidor solar, se estima un ahorro promedio del 85% en el recibo
+            const ahorroBimestral = gasto * 0.85;
+            const ahorroAnual = ahorroBimestral * 6;
+
+            // Estimación realista del costo del sistema según el consumo del usuario
+            const inversionEstimada = ahorroAnual <= 12000 ? 14900 : 42000;
+            const aniosRetorno = (inversionEstimada / ahorroAnual).toFixed(1);
+
+            resultado.textContent = '$' + ahorroAnual.toLocaleString('es-MX', { maximumFractionDigits: 0 }) + ' MXN';
+            retorno.textContent = 'Recuperas inversión en ~' + aniosRetorno + ' años';
+        }
+
+        // 2. Función para enfocar la calculadora al hacer clic en "Calcula tu ahorro"
+        function mostrarCalculadora() {
+            const inputGasto = document.getElementById('gastoBimestral');
+            if (inputGasto) {
+                setTimeout(() => inputGasto.focus(), 400);
+            }
+        }
+
+        // 3. Función para abrir el modal de cada producto con su precio y detalles
+        let instanciaModalProducto = null;
+        let modeloSeleccionadoActual = 'Kit Hogar Inicial';
+
+        function abrirModalProducto(titulo, precio, subtitulo, descripcion) {
+            document.getElementById('modalTitulo').textContent = titulo;
+            document.getElementById('modalPrecio').textContent = precio;
+            document.getElementById('modalSubtitulo').textContent = subtitulo;
+            document.getElementById('modalDescripcion').textContent = descripcion;
+
+            // Guardar el modelo para seleccionarlo automáticamente si pulsan "Cotizar este modelo"
+            if (titulo.includes('Mini')) {
+                modeloSeleccionadoActual = 'Panel Mini';
+            } else if (titulo.includes('Escolar')) {
+                modeloSeleccionadoActual = 'Paquete Escolar / Negocio';
+            } else {
+                modeloSeleccionadoActual = 'Kit Hogar Inicial';
+            }
+
+            const modalEl = document.getElementById('modalDetalleProducto');
+            instanciaModalProducto = bootstrap.Modal.getOrCreateInstance(modalEl);
+            instanciaModalProducto.show();
+        }
+
+        // 4. Función para cerrar el modal y preseleccionar el modelo en el formulario de cotización
+        function cerrarModalYCotizar() {
+            if (instanciaModalProducto) {
+                instanciaModalProducto.hide();
+            }
+            const selectModelo = document.getElementById('modeloInteres');
+            if (selectModelo) {
+                selectModelo.value = modeloSeleccionadoActual;
+            }
+        }
+
+        // 5. Función para manejar el envío del formulario de cotización sin recargar la página
+        function enviarCotizacion(event) {
+            event.preventDefault();
+            const alerta = document.getElementById('alertaEnvio');
+            alerta.classList.remove('d-none');
+            event.target.reset();
+        }
+
+        // Inicializar cálculo por defecto al cargar la página
+        window.addEventListener('DOMContentLoaded', calcularAhorro);
+    </script>
+</body>
+</html>
